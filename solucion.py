@@ -12,6 +12,7 @@ with open('./inputs/Entrada-80000.txt', 'r') as file:
 
 import time
 
+# It makes 2 for loops, the first one [i] is to iterate over the list, the second one [j] is to compare the current element with the next one, if the current element is greater than the next one, it swaps them.
 def bubble(input : list[int])-> {list[int],int}:
 	now = time.time()
 	for i in range(len(input)):
