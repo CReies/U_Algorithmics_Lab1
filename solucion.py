@@ -33,3 +33,15 @@ def selection(input : list[int])-> {list[int],int}:
 		input[i], input[min] = input[min], input[i]
 	return {'sortedList': input, 'time': time.time() - now}
 
+# The insertion method consist in 2 loops, the first one is a for loop that starts in the second element of the list, the second one is a while loop that compares the current element with the previous one, if the current element is smaller than the previous one, it swaps them, then compares it with the second previous element, and if is smaller, it swaps them, and it does this until the current element is bigger than the previous one, then it goes to the next element and does the same until the list is sorted.
+def insertion(input : list[int])-> {list[int],int}:
+	now = time.time()
+	for i in range(1, len(input)):
+		key = input[i]
+		j = i - 1
+		while j >= 0 and key < input[j]:
+			input[j + 1] = input[j]
+			j -= 1
+		input[j + 1] = key
+	return {'sortedList': input, 'time': time.time() - now}
+
