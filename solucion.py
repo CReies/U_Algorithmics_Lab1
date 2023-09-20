@@ -13,7 +13,7 @@ with open('./inputs/Entrada-80000.txt', 'r') as file:
 	input80000 = [int(line.strip()) for line in lines]
 
 
-# It makes 2 for loops, the first one [i] is to iterate over the list, the second one [j] is to compare the current element with the next one, if the current element is greater than the next one, it swaps them.
+# The bubble method consist in a for loop inside another for loop, the inside loop is where the operations are made, it compares the current element with the next one, if the current element is bigger than the next one, it swaps them, and it does this until the list is sorted.
 def bubble(input : list[int])-> {list[int],int}:
 	now = time.time()
 	for i in range(len(input)):
@@ -22,7 +22,7 @@ def bubble(input : list[int])-> {list[int],int}:
 				input[j], input[j+1] = input[j+1], input[j]
 	return {'sortedList': input, 'time': time.time() - now}
 
-# It makes 2 for loops, the first one [i] is to iterate over the list, the second one [j] is to find the minimum value in the rest of the list, when the second loop ends, it swaps the current element [i] with the minimum value [min].
+# The selection method consist in a for loop inside another for loop, it finds the minimum element in the list and swaps it with the first element, then it finds the second minimum element and swaps it with the second element, and it does this until the list is sorted.
 def selection(input : list[int])-> {list[int],int}:
 	now = time.time()
 	for i in range(len(input)):
