@@ -20,3 +20,14 @@ def bubble(input : list[int])-> {list[int],int}:
 			if input[j] > input[j+1]:
 				input[j], input[j+1] = input[j+1], input[j]
 	return {'sortedList': input, 'time': time.time() - now}
+
+# It makes 2 for loops, the first one [i] is to iterate over the list, the second one [j] is to find the minimum value in the rest of the list, when the second loop ends, it swaps the current element [i] with the minimum value [min].
+def selection(input : list[int])-> {list[int],int}:
+	now = time.time()
+	for i in range(len(input)):
+		min = i
+		for j in range(i+1, len(input)):
+			if input[min] > input[j]:
+				min = j
+		input[i], input[min] = input[min], input[i]
+	return {'sortedList': input, 'time': time.time() - now}
