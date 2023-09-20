@@ -1,3 +1,5 @@
+import time
+
 with open('./inputs/Entrada-800.txt', 'r') as file:
 	lines = file.readlines()
 	input800 = [int(line.strip()) for line in lines]
@@ -10,7 +12,6 @@ with open('./inputs/Entrada-80000.txt', 'r') as file:
 	lines = file.readlines()
 	input80000 = [int(line.strip()) for line in lines]
 
-import time
 
 # It makes 2 for loops, the first one [i] is to iterate over the list, the second one [j] is to compare the current element with the next one, if the current element is greater than the next one, it swaps them.
 def bubble(input : list[int])-> {list[int],int}:
@@ -31,3 +32,4 @@ def selection(input : list[int])-> {list[int],int}:
 				min = j
 		input[i], input[min] = input[min], input[i]
 	return {'sortedList': input, 'time': time.time() - now}
+
