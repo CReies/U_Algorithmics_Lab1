@@ -45,3 +45,30 @@ def insertion(input : list[int])-> {list[int],int}:
 		input[j + 1] = key
 	return {'sortedList': input, 'time': time.time() - now}
 
+# The merge method consist in a recursive function that divides the list in 2 parts, then it calls itself with the left part and the right part, and it does this until the list is divided in single elements, then it starts to merge the lists, it compares the first element of the left list with the first element of the right list, if the first element of the left list is smaller, it adds it to the final list, and it does this until one of the lists is empty, then it adds the remaining elements of the other list to the final list, and it does this until the whole list is sorted.
+def merge(input : list[int])-> {list[int],int}:
+	now = time.time()
+	if len(input) > 1:
+		mid = len(input) // 2
+		left = input[:mid]
+		right = input[mid:]
+		merge(left)
+		merge(right)
+		i = j = k = 0
+		while i < len(left) and j < len(right):
+			if left[i] < right[j]:
+				input[k] = left[i]
+				i += 1
+			else:
+				input[k] = right[j]
+				j += 1
+			k += 1
+		while i < len(left):
+			input[k] = left[i]
+			i += 1
+			k += 1
+		while j < len(right):
+			input[k] = right[j]
+			j += 1
+			k += 1
+	return {'sortedList': input, 'time': time.time() - now}
