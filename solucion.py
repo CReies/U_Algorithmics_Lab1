@@ -1,17 +1,24 @@
 import time
 
+# ====== Inputs ====== #
+
+# 800 lines input
 with open('./inputs/Entrada-800.txt', 'r') as file:
 	lines = file.readlines()
 	input800 = [int(line.strip()) for line in lines]
 
+# 8000 lines input
 with open('./inputs/Entrada-8000.txt', 'r') as file:
 	lines = file.readlines()
 	input8000 = [int(line.strip()) for line in lines]
 
+# 80000 lines input
 with open('./inputs/Entrada-80000.txt', 'r') as file:
 	lines = file.readlines()
 	input80000 = [int(line.strip()) for line in lines]
 
+
+# ====== Functions ====== #
 
 # The bubble method consist in a for loop inside another for loop, the inside loop is where the operations are made, it compares the current element with the next one, if the current element is bigger than the next one, it swaps them, and it does this until the list is sorted.
 def bubble(input : list[int])-> list[int]:
@@ -78,3 +85,105 @@ def quick(input):
 		left = [x for x in input[1:] if x < pivot]
 		right = [x for x in input[1:] if x >= pivot]
 		return quick(left) + [pivot] + quick(right)
+
+# ====== Interface ====== #
+
+def printSeparator():
+	print('\n====================\n')
+
+def clearScreen():
+	print('\n\n\n\n\n\n\n')
+
+def pressEnter():
+	input('Presione enter para continuar...')
+
+def invalidOption():
+	print('Opción inválida')
+	pressEnter()
+	clearScreen()
+
+while True:
+	clearScreen()
+	print('Bienvenido al programa de ordenamiento de listas')
+
+	printSeparator()
+
+	print('Seleccione el método de ordenamiento que desea utilizar:')
+	method = input('1. Burbuja\n2. Selección\n3. Inserción\n4. MergeSort\n5. QuickSort\n')
+	validMethods = ['1', '2', '3', '4', '5']
+
+	if method not in validMethods:
+		invalidOption()
+		continue
+
+	printSeparator()
+
+	print('Seleccione el tamaño de la lista que desea ordenar:')
+	size = input('1. 800\n2. 8000\n3. 80000\n')
+	validSizes = ['1', '2', '3']
+
+	if size not in validSizes:
+		invalidOption()
+		continue
+
+	printSeparator()
+
+	print('Cuantas veces desea ordenar la lista para promediar? (max: 100)')
+	times = int(input())
+	maxTimes = 100
+
+	if times > maxTimes:
+		print('El número de veces no puede ser mayor a ' + str(maxTimes))
+		pressEnter()
+		clearScreen()
+		continue
+
+	printSeparator()
+
+	print('Desea ver la lista ordenada?')
+	show = input('1. Si\n2. No\n') == '1'
+
+	printSeparator()
+
+	selectedMethod = None
+	selectedInput = None
+
+	if method == '1':
+		selectedMethod = bubble
+	elif method == '2':
+		selectedMethod = selection
+	elif method == '3':
+		selectedMethod = insertion
+	elif method == '4':
+		selectedMethod = merge
+	elif method == '5':
+		selectedMethod = quick
+
+	
+	if size == '1':
+		selectedInput = input800
+	elif size == '2':
+		selectedInput = input8000
+	elif size == '3':
+		selectedInput = input80000
+
+
+	print('Ordenando lista...')
+	start = time.time()
+	for i in range(times):
+		selectedMethod(selectedInput)
+	end = time.time()
+
+	if show:
+		printSeparator()
+		print('Lista ordenada:')
+		print(selectedMethod(selectedInput))
+	else:
+		print('Lista ordenada')
+
+	printSeparator()
+
+	print('Tiempo total: ' + str(end - start) + ' s')
+	print('Tiempo promedio: ' + str((end - start) / times) + ' s')
+	pressEnter()
+
