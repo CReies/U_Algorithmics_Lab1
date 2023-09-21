@@ -46,7 +46,7 @@ def insertion(input : list[int])-> {list[int],int}:
 	return {'sortedList': input, 'time': time.time() - now}
 
 # The merge method consist in a recursive function that divides the list in 2 parts, then it calls itself with the left part and the right part, and it does this until the list is divided in single elements, then it starts to merge the lists, it compares the first element of the left list with the first element of the right list, if the first element of the left list is smaller, it adds it to the final list, and it does this until one of the lists is empty, then it adds the remaining elements of the other list to the final list, and it does this until the whole list is sorted.
-def merge(input : list[int] | {list[int],int})-> {list[int],int}:
+def merge(input : list[int] or {list[int],int})-> {list[int],int}:
 	if isinstance(input, dict):
 		input = input['sortedList']
 	now = time.time()
