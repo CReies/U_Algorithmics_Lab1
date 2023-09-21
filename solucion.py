@@ -80,11 +80,11 @@ def merge(input : list[int])-> list[int]:
 def quick(input):
 	if len(input) <= 1:
 		return input
-	else:
-		pivot = input[0]
-		left = [x for x in input[1:] if x < pivot]
-		right = [x for x in input[1:] if x >= pivot]
-		return quick(left) + [pivot] + quick(right)
+
+	pivot = input[0]
+	left = [x for x in input[1:] if x < pivot]
+	right = [x for x in input[1:] if x >= pivot]
+	return quick(left) + [pivot] + quick(right)
 
 # ====== Interface ====== #
 
