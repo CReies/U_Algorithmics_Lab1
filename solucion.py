@@ -67,4 +67,14 @@ def merge(input : list[int])-> list[int]:
 			input[k] = right[j]
 			j += 1
 			k += 1
-	return {'sortedList': input, 'time': time.time() - now}
+	return input
+
+# The quick method consist in a recursive function that first checks if the list has more than 1 element, if it has, it takes the first element as the pivot, then it creates 2 lists, one with the elements smaller than the pivot, and the other with the elements bigger than the pivot, then it calls itself with the left list and the right list, and it does this until the list is divided in single elements, then it starts to merge the lists, it adds the left list, then the pivot, and then the right list, and it does this until the whole list is sorted.
+def quick(input):
+	if len(input) <= 1:
+		return input
+	else:
+		pivot = input[0]
+		left = [x for x in input[1:] if x < pivot]
+		right = [x for x in input[1:] if x >= pivot]
+		return quick(left) + [pivot] + quick(right)
