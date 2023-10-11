@@ -1,4 +1,6 @@
-import time
+import os
+import time 
+import math
 
 # ====== Inputs ====== #
 
@@ -92,7 +94,8 @@ def printSeparator():
 	print('\n====================\n')
 
 def clearScreen():
-	print('\n\n\n\n\n\n\n')
+	for i in range(os.get_terminal_size().lines):
+		print('\n')
 
 def pressEnter():
 	input('Presione enter para continuar...')
@@ -102,6 +105,14 @@ def invalidOption():
 	pressEnter()
 	clearScreen()
 
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = os.get_terminal_size().columns, fill = '█', printEnd = "\r"):
+	percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+	filledLength = int(length * iteration // total)
+	bar = fill * filledLength + '-' * (length - filledLength)
+	print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+	if iteration == total:
+		print()
+
 while True:
 	clearScreen()
 	print('Bienvenido al programa de ordenamiento de listas')
@@ -109,8 +120,8 @@ while True:
 	printSeparator()
 
 	print('Seleccione el método de ordenamiento que desea utilizar:')
-	method = input('1. Burbuja\n2. Selección\n3. Inserción\n4. MergeSort\n5. QuickSort\n')
-	validMethods = ['1', '2', '3', '4', '5']
+	method = input('1. Burbuja\n2. Selección\n3. Inserción\n4. MergeSort\n5. QuickSort\n6. Salir\n')
+	validMethods = ['1', '2', '3', '4', '5', '6']
 
 	if method not in validMethods:
 		invalidOption()
@@ -130,7 +141,7 @@ while True:
 
 	print('Cuantas veces desea ordenar la lista para promediar? (max: 100)')
 	times = int(input())
-	maxTimes = 100
+	maxTimes = 10000
 
 	if times > maxTimes:
 		print('El número de veces no puede ser mayor a ' + str(maxTimes))
@@ -158,6 +169,8 @@ while True:
 		selectedMethod = merge
 	elif method == '5':
 		selectedMethod = quick
+	elif method == '6':
+		break
 
 	
 	if size == '1':
@@ -169,10 +182,17 @@ while True:
 
 
 	print('Ordenando lista...')
+
+	printProgressBar(0, times, prefix = 'Progreso:', suffix = 'Completado', length = os.get_terminal_size().columns - 40)
+
 	start = time.time()
 	for i in range(times):
 		selectedMethod(selectedInput)
+		printProgressBar(i + 1, times, prefix = 'Progreso:', suffix = 'Completado', length = os.get_terminal_size().columns - 40)
+
 	end = time.time()
+
+	printSeparator()
 
 	if show:
 		printSeparator()
